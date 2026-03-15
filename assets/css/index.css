@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    index.css — 首頁專用樣式
    ============================================================ */
 
@@ -30,7 +30,14 @@ body {
   transition: background 0.2s;
 }
 .about-social-item:hover {
-  background: rgba(255,255,255,0.08);
+  background: var(--social-hover);
+}
+.about-social-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  width: 100%;
 }
 .about-social-item i {
   font-size: 1.4rem;
@@ -40,19 +47,18 @@ body {
 }
 .about-social-intro {
   font-size: 0.95rem;
-  color: #f0f0f0;
+  color: var(--text-main);
   font-weight: 500;
   letter-spacing: 0.3px;
 }
 .litlink-social a {
-  color: #fff;
+  color: var(--text-main);
   font-size: 2rem;
   margin: 0 0.5rem;
   transition: color 0.2s, transform 0.2s;
 }
 .litlink-social a:hover {
-  color: #7ec8e3;
-  transform: scale(1.05);
+  color: var(--accent);
 }
 
 /* ── Avatar ── */
@@ -67,9 +73,18 @@ body {
 }
 .litlink-id {
   font-size: 1.6rem;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 0.25rem;
   letter-spacing: 1px;
+}
+
+/* ── Baha logo icon ── */
+.baha-logo {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 2px #000);
 }
 
 /* ── Live list (index summary) ── */
@@ -81,7 +96,7 @@ body {
   display: flex;
   gap: 0.75rem;
   padding: 0.45rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--live-line);
   line-height: 1.6;
   font-size: 0.93rem;
 }
@@ -91,7 +106,7 @@ body {
 .live-date {
   font-family: 'Courier New', monospace;
   white-space: nowrap;
-  color: #7ec8e3;
+  color: var(--accent);
   font-weight: 600;
   font-size: 0.88rem;
   min-width: 6.5rem;

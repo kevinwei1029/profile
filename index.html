@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,58 +9,91 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="assets/css/shared.css">
   <link rel="stylesheet" href="assets/css/index.css">
+  <!-- 防閃擊：在樣式讀取前從 localStorage 選取主題 -->
+  <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
 </head>
+
 <body>
-  <div class="container py-5" style="max-width: 540px;">
+  <!-- 背景色調覆蓋層（白天模式譜色用） -->
+  <div class="bg-overlay"></div>
+  <!-- 主題切換按鈕 -->
+  <button class="theme-toggle" id="themeToggle" aria-label="切換主題">
+    <i class="bi bi-sun"></i>
+  </button>
+  <!-- Hamburger toggle (挙動後出現) -->
+  <button class="nav-toggle" id="navToggle" aria-label="選單">
+    <i class="bi bi-list"></i>
+  </button>
+  <!-- 漢堡區塊下拉選單 -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="/index.html" class="active">首頁</a>
+    <a href="/docs/live.html">現地紀錄</a>
+    <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank">巴哈小屋</a>
+  </div>
+  <!-- Top navbar pill (頁面頂端可見) -->
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/index.html" class="active">首頁</a>
+      <a href="/docs/live.html">現地紀錄</a>
+      <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank">巴哈小屋</a>
+    </div>
+  </nav>
+
+  <div class="container py-5" style="max-width: 680px;">
     <!-- Profile Block -->
     <div class="profile-block text-center">
-      <!-- <img src="assets/rina.webp" alt="個人照片" class="litlink-avatar" onerror="this.style.display='none'"> -->
       <img src="assets/rina.webp" alt="個人照片" class="litlink-avatar" onerror="this.style.display='none'">
       <h1 class="h1 mb-1">冠位非洲人</h1>
       <div class="litlink-id">Robert Landen</div>
       <p class="h4 mt-4">真的不可能成為女聲優的狗（也許可能？）</p>
     </div>
+
+    <!-- About Block -->
+    <div class="general-block">
+      <h2 class="h5">關於我</h2>
+      <p class="mt-3">
+        冠位非洲人，或者也可以音譯直接叫我羅伯特。<br>
+        一個正在交作業大學被 GPA 摧殘的學生。<br>
+        前動畫社幹部，負責整一些抽象怪活（笑點解析：羅伯特蘭登也是五字神人）。<br>
+        目前最大的心願是有教授願意收留我，如果沒有教授要我的話那寧願轉生成為女聲優的狗。<br>
+        <br>
+        常常在巴哈跟 FB 個版發小作文
+      </p>
+    </div>
+
     <!-- Social Links Block -->
-    <div class="general-block text-center litlink-social">
-      <ul class="about-social-list">
+    <div class="general-block litlink-social">
+      <h2 class="h5">社群連結</h2>
+      <ul class="about-social-list mt-2">
         <li class="about-social-item">
-          <a href="https://github.com/kevinwei1029/kevinwei1029.github.io" target="_blank" style="display:flex;align-items:center;text-decoration:none;color:#fff;">
+          <a href="https://github.com/kevinwei1029/kevinwei1029.github.io" target="_blank">
             <i class="bi bi-github"></i><span class="about-social-intro">Source Code</span>
           </a>
         </li>
         <li class="about-social-item">
-          <a href="https://github.com/kevinwei1029" target="_blank" style="display:flex;align-items:center;text-decoration:none;color:#fff;">
-            <i class="bi bi-github"></i><span class="about-social-intro">Github首頁</span>
+          <a href="https://github.com/kevinwei1029" target="_blank">
+            <i class="bi bi-github"></i><span class="about-social-intro">GitHub 首頁</span>
           </a>
         </li>
         <li class="about-social-item">
-          <a href="https://www.youtube.com/@kevinwei4136/videos" target="_blank" style="display:flex;align-items:center;text-decoration:none;color:#fff;">
+          <a href="https://www.youtube.com/@kevinwei4136/videos" target="_blank">
             <i class="bi bi-youtube"></i><span class="about-social-intro">專放奇怪影片</span>
           </a>
         </li>
         <li class="about-social-item">
-          <a href="https://www.facebook.com/robert.landen.583" target="_blank" style="display:flex;align-items:center;text-decoration:none;color:#fff;">
+          <a href="https://www.facebook.com/robert.landen.583" target="_blank">
             <i class="bi bi-facebook"></i><span class="about-social-intro">歡迎聊天戳友</span>
           </a>
         </li>
         <li class="about-social-item">
-          <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank" style="display:flex;align-items:center;text-decoration:none;color:#fff;">
-            <img src="assets/bahaLOGO_1.png" alt="巴哈姆特LOGO" style="width: 1.65rem; height: 1.65rem; margin-right: 0.55rem; display: inline-block; vertical-align: middle; filter: drop-shadow(0 0 2px #000);">
+          <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank">
+            <img src="assets/bahaLOGO_1.png" alt="巴哈姆特 LOGO" class="baha-logo">
             <span class="about-social-intro">不定期掉落日旅演唱會紀錄文</span>
           </a>
         </li>
       </ul>
     </div>
-    <!-- About Block -->
-    <div class="general-block">
-      <h2 class="h5">關於我</h2>
-      <p class="mt-3">羅伯特，一個正在交作業大學被GPA摧殘的學生。<br>
-        前動畫社幹部，負責整一些抽象怪活（笑點解析：羅伯特蘭登也是五字神人）。<br>
-        目前最大的心願是有教授願意收留我，如果沒有教授要我的話那寧願轉生成為女聲優的狗。<br>
-        <br>
-        常常在巴哈跟FB個版發小作文
-      </p>
-    </div>
+
     <!-- Activities Block -->
     <div class="general-block">
       <h2 class="h5">現地參戰紀錄（持續更新）</h2>
@@ -72,25 +106,33 @@
         <li><span class="live-date">2025-12-26</span><span>Roselia ASIA TOUR「Neuweltfahrt」台北公演</span></li>
         <li><span class="live-date">2026-01-15</span><span>Ave Mujica 6th LIVE「Ulterius Procedere」大阪公演</span></li>
         <li><span class="live-date">2026-01-16</span><span>Roselia ASIA TOUR「Neuweltfahrt」大阪追加公演</span></li>
-        <li><span class="live-date">2026-01-17</span><span>虹ヶ咲学園スクールアイドル同好会 FLOWER MUSIC LIVE『Boooooom Boooooom Bee!!』<br>兩日全通</span></li>
-        <li><span class="live-date">2026-02-28</span><span>BanG Dream! 10th Anniversary LIVE<br>「In the name of BanG Dream!」</span></li>
-        <li><span class="live-date">2026-03-01</span><span>MyGO!!!!!×Ave Mujica ツーマンライブ<br>「“moment / memory”」</span></li>
+        <li><span class="live-date">2026-01-17</span><span>虹ヶ咲学園スクールアイドル同好会 FLOWER MUSIC LIVE『Boooooom Boooooom
+            Bee!!』兩日全通</span></li>
+        <li><span class="live-date">2026-02-28</span><span>BanG Dream! 10th Anniversary LIVE「In the name of BanG
+            Dream!」</span></li>
+        <li><span class="live-date">2026-03-01</span><span>MyGO!!!!!×Ave Mujica ツーマンライブ「"moment / memory"」</span>
+        </li>
       </ul>
-        <p>歡迎場外認親或者來線下撞</p>
-        <a href="docs/live.html" class="btn btn-outline-light btn-card">
-            閱讀更多
-        </a>
+      <p>歡迎場外認親或者來線下撞</p>
+      <a href="docs/live.html" class="btn btn-outline-light btn-card">
+        閱讀更多
+      </a>
     </div>
-    <!-- Games Block -->
+
+    <!-- Games Block: 手遊 -->
     <div class="general-block">
-      <h2 class="h5">手遊 坑單：</h2>
+      <h2 class="h5">手遊坑單</h2>
       <ul>
         <li>FGO（日）</li>
         <li>BGD（日）</li>
         <li>学マス</li>
       </ul>
-        <p>看完二部終章真的覺得 FGO 宇宙神遊<br>持續更新中，以上歡迎私訊加友</p>
-      <h2 class="h5">gal / avg 坑單：</h2>
+      <p>看完二部終章真的覺得 FGO 宇宙神遊<br>持續更新中，以上歡迎私訊加友</p>
+    </div>
+
+    <!-- Games Block: gal/AVG -->
+    <div class="general-block">
+      <h2 class="h5">Gal/AVG 坑單</h2>
       <ul>
         <li>柚子社作品族繁不及備載</li>
         <li>拔作島</li>
@@ -98,42 +140,51 @@
         <li>%貓系列</li>
         <li>魔法少女的魔女審判</li>
       </ul>
-        <p>持續更新中，有好作品也歡迎推坑</p>
+      <p>持續更新中，有好作品也歡迎推坑</p>
     </div>
+
     <!-- Anime Block -->
     <div class="general-block">
-      <h2 class="h5">動畫類坑單：</h2>
+      <h2 class="h5">動畫坑單</h2>
       <ul>
         <li>Girls Band Cry（花田魔法我最～喜歡）</li>
-        <li>lovelive （μ's）</li>
+        <li>lovelive（μ's）</li>
         <li>lovelive sunshine</li>
         <li>lovelive 虹咲（推雪菜）</li>
         <li>比宇宙更遠的地方</li>
         <li>遊戲人生</li>
         <li>不起眼女主角培育法</li>
         <li>無職轉生</li>
-        </ul>
+      </ul>
       <p>每季新番若干<br>
-      其他諸多新老番族繁不及備載</p>
+        其他諸多新老番族繁不及備載</p>
     </div>
+
     <!-- Embed Website Block -->
     <div class="general-block">
-      <h2 class="h5">編輯現地live維基</h2>
-      <div style="width:100%;height:350px;overflow:hidden;border-radius:0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.15);background:#222;">
-        <iframe src="https://live.canaria.cc" style="width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+      <h2 class="h5">編輯現地 live 維基</h2>
+      <p>協助維護現地演唱會資訊維基，歡迎參考或共同貢獻。</p>
+      <div
+        style="width:100%;height:350px;overflow:hidden;border-radius:0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.15);background:#222;">
+        <iframe src="https://live.canaria.cc" style="width:100%;height:100%;border:none;" allowfullscreen
+          loading="lazy"></iframe>
       </div>
     </div>
+
     <!-- Ending Block -->
     <div class="general-block">
       <h2 class="h5">結語</h2>
       <p class="mt-3">感謝看到最後的各位，希望能和大家成為（說不定有一天能在演唱會場相見的）好朋友！</p>
       <p class="mt-3" id="lastUpdateDate">載入中...</p>
     </div>
+
     <!-- Visitor Counter Block -->
     <div class="litlink-block text-center" style="margin-bottom:1.5rem;">
-  <span class="h5" style="color:#fff;margin-right:0.5rem;text-shadow:2px 2px 6px #000,0 0 2px #000;">本站訪客人數：</span>
-  <span id="busuanzi_value_site_uv" style="font-size:1.5rem;font-weight:bold;color:#fff;margin-left:0.5rem;text-shadow:2px 2px 6px #000,0 0 2px #000;"></span>
+      <span class="h5" style="color:#fff;margin-right:0.5rem;text-shadow:2px 2px 6px #000,0 0 2px #000;">本站訪客人數：</span>
+      <span id="busuanzi_value_site_uv"
+        style="font-size:1.5rem;font-weight:bold;color:#fff;margin-left:0.5rem;text-shadow:2px 2px 6px #000,0 0 2px #000;"></span>
     </div>
+
     <!-- Footer -->
     <div class="text-center text-light small mt-4" style="opacity:0.7;">
       © <span id="y"></span> 冠位非洲人 · 以 GitHub Pages 發布
@@ -143,4 +194,5 @@
   <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>

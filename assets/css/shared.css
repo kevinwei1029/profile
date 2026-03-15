@@ -1,6 +1,65 @@
-﻿/* ============================================================
+/* ============================================================
    shared.css — 全站共用樣式
    ============================================================ */
+
+/* ── Color tokens: dark mode (default) ── */
+:root {
+  --card-bg: rgba(18, 18, 18, 0.80);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
+  --card-shadow-h: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --text-main: #f0f0f0;
+  --text-sub: rgba(240, 240, 240, 0.90);
+  --text-muted: rgba(240, 240, 240, 0.48);
+  --accent: #a78bfa;
+  --accent-dim: rgba(167, 139, 250, 0.45);
+  --accent-hover-bg: rgba(167, 139, 250, 0.20);
+  --nav-bg: rgba(12, 12, 12, 0.72);
+  --nav-border: rgba(255, 255, 255, 0.10);
+  --social-hover: rgba(255, 255, 255, 0.08);
+  --btn-bg: rgba(255, 255, 255, 0.10);
+  --btn-border: rgba(255, 255, 255, 0.30);
+  --live-line: rgba(255, 255, 255, 0.06);
+  --tl-line: rgba(167, 139, 250, 0.65);
+  --tl-line-fade: rgba(167, 139, 250, 0.10);
+  --tl-dot-glow: rgba(167, 139, 250, 0.75);
+  --profile-shadow: 3px 3px 8px rgba(0, 0, 0, 0.85), 0 0 4px rgba(0, 0, 0, 0.6);
+  --overlay-bg: transparent;
+}
+
+/* ── Color tokens: light mode ── */
+[data-theme="light"] {
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --card-shadow: 0 4px 20px rgba(100, 80, 200, 0.10);
+  --card-shadow-h: 0 6px 28px rgba(100, 80, 200, 0.20);
+  --text-main: #1e1b4b;
+  --text-sub: rgba(30, 27, 75, 0.82);
+  --text-muted: rgba(30, 27, 75, 0.45);
+  --accent: #6d28d9;
+  --accent-dim: rgba(109, 40, 217, 0.30);
+  --accent-hover-bg: rgba(109, 40, 217, 0.12);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --social-hover: rgba(109, 40, 217, 0.07);
+  --btn-bg: rgba(109, 40, 217, 0.08);
+  --btn-border: rgba(109, 40, 217, 0.25);
+  --live-line: rgba(0, 0, 0, 0.07);
+  --tl-line: rgba(109, 40, 217, 0.50);
+  --tl-line-fade: rgba(109, 40, 217, 0.07);
+  --tl-dot-glow: rgba(109, 40, 217, 0.55);
+  --overlay-bg: transparent;
+}
+
+/* ── Background overlay (light mode tints the background image) ── */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--overlay-bg);
+  transition: background 0.4s;
+  pointer-events: none;
+}
 
 /* ── Base ── */
 body {
@@ -13,22 +72,190 @@ body {
   line-height: 1.8;
 }
 
+/* ── Profile text color in light mode ── */
+/* 
+[data-theme="light"] .profile-block * {
+  color: #1e1b4b !important;
+}
+*/
+
+/* ── Top navbar pill (visible at page top) ── */
+.site-nav {
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem 1rem 0 1rem;
+  background: transparent;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.site-nav.nav-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.5rem);
+}
+
+.site-nav-inner {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 2rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--nav-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.site-nav a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 2rem;
+  opacity: 0.80;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  background: var(--accent-hover-bg);
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* ── Hamburger toggle (fixed, appears on scroll) ── */
+.nav-toggle {
+  position: fixed;
+  top: 0.85rem;
+  right: 1rem;
+  z-index: 300;
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--nav-border);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-main);
+  font-size: 1.25rem;
+  opacity: 0;
+  transform: scale(0.75);
+  transition: opacity 0.25s, transform 0.25s, background 0.4s, border-color 0.4s, color 0.4s;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.20);
+}
+
+.nav-toggle.nav-visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* ── Theme toggle button (always visible, top-left) ── */
+.theme-toggle {
+  position: fixed;
+  top: 0.85rem;
+  left: 1rem;
+  z-index: 300;
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--nav-border);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.20);
+  transition: background 0.4s, border-color 0.4s, color 0.2s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.12);
+  color: var(--accent);
+}
+
+/* ── Hamburger dropdown drawer ── */
+.nav-drawer {
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
+  z-index: 299;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--card-shadow);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  opacity: 0;
+  transform: translateY(-0.5rem) scale(0.95);
+  transform-origin: top right;
+  transition: opacity 0.2s, transform 0.2s, background 0.4s;
+  pointer-events: none;
+}
+
+.nav-drawer.nav-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.nav-drawer a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 0.6rem;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.nav-drawer a:hover,
+.nav-drawer a.active {
+  background: var(--accent-hover-bg);
+  color: var(--accent);
+}
+
 /* ── Card blocks ── */
 .general-block {
-  background: rgba(18, 18, 18, 0.78);
-  color: #f0f0f0;
+  background: var(--card-bg);
+  color: var(--text-main);
   border-radius: 1rem;
-  box-shadow: 0 6px 28px rgba(0,0,0,0.35);
+  box-shadow: var(--card-shadow);
   margin-bottom: 1.75rem;
   padding: 1.75rem 1.75rem 1.25rem 1.75rem;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--card-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background 0.4s, border-color 0.4s, color 0.4s;
 }
+
 .general-block:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  box-shadow: var(--card-shadow-h);
+}
+
+/* 社群連結區塊不做 hover 上浮 */
+.general-block.litlink-social:hover {
+  transform: none;
+  box-shadow: var(--card-shadow);
 }
 
 /* ── Section headers ── */
@@ -40,11 +267,13 @@ body {
   letter-spacing: 0.5px;
   padding-bottom: 0.6rem;
   margin-bottom: 0.85rem;
-  border-bottom: 2px solid rgba(126, 200, 227, 0.5);
-  color: #7ec8e3;
+  border-bottom: 2px solid var(--accent-dim);
+  color: var(--accent);
+  transition: color 0.4s, border-color 0.4s;
 }
+
 .general-block h2 p {
-  color: #7ec8e3;
+  color: var(--accent);
   margin-bottom: 0;
 }
 
@@ -53,20 +282,23 @@ body {
   padding-left: 1.25rem;
   margin-bottom: 0.75rem;
 }
+
 .general-block ul li {
   margin-bottom: 0.35rem;
   line-height: 1.7;
   font-size: 0.93rem;
 }
+
 .general-block p {
   font-size: 0.93rem;
   line-height: 1.8;
-  color: rgba(240,240,240,0.9);
+  color: var(--text-sub);
+  transition: color 0.4s;
 }
 
 /* ── Profile block ── */
 .profile-block {
-  background: rgba(30,30,30,0);
+  background: rgba(30, 30, 30, 0);
   color: #fff;
   border-radius: 1.5rem;
   box-shadow: none;
@@ -74,10 +306,13 @@ body {
   padding: 2.5rem 1.5rem 1.5rem;
   backdrop-filter: blur(0px);
 }
+
 .profile-block * {
   font-weight: bold !important;
-  text-shadow: 3px 3px 8px rgba(0,0,0,0.85), 0 0 4px rgba(0,0,0,0.6);
+  text-shadow: var(--profile-shadow);
+  transition: text-shadow 0.4s;
 }
+
 .profile-block .h1 {
   font-size: 2rem;
 }
@@ -89,19 +324,25 @@ body {
   padding: 0.5rem 1.75rem;
   transition: all 0.25s;
 }
+
 .btn-outline-light:hover {
-  background: rgba(255,255,255,0.18) !important;
+  background: rgba(255, 255, 255, 0.18) !important;
   transform: translateY(-1px);
+}
+
+[data-theme="light"] .btn-outline-light:hover {
+  background: var(--accent-hover-bg) !important;
 }
 
 /* ── Shared button inline style helper ── */
 .btn-card {
-  background: rgba(255,255,255,0.1);
-  border: 1.5px solid rgba(255,255,255,0.3);
-  color: #fff;
+  background: var(--btn-bg);
+  border: 1.5px solid var(--btn-border);
+  color: var(--text-main);
   font-weight: 600;
   backdrop-filter: blur(4px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+  transition: background 0.4s, border-color 0.4s, color 0.4s;
 }
 
 /* ── Footer ── */

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,12 +9,50 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../assets/css/shared.css">
   <link rel="stylesheet" href="../assets/css/live.css">
+  <!-- 防閃擊：在樣式讀取前從 localStorage 選取主題 -->
+  <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
 </head>
+
 <body>
+  <!-- 背景色調覆蓋層（白天模式譜色用） -->
+  <div class="bg-overlay"></div>
+  <!-- 主題切換按鈕 -->
+  <button class="theme-toggle" id="themeToggle" aria-label="切換主題">
+    <i class="bi bi-sun"></i>
+  </button>
+  <!-- Hamburger toggle (挙動後出現) -->
+  <button class="nav-toggle" id="navToggle" aria-label="選單">
+    <i class="bi bi-list"></i>
+  </button>
+  <!-- 漢堡區塊下拉選單 -->
+  <div class="nav-drawer" id="navDrawer">
+    <a href="/index.html">首頁</a>
+    <a href="/docs/live.html" class="active">現地紀錄</a>
+    <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank">巴哈小屋</a>
+  </div>
+  <!-- Top navbar pill (頁面頂端可見) -->
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="/index.html">首頁</a>
+      <a href="/docs/live.html" class="active">現地紀錄</a>
+      <a href="https://home.gamer.com.tw/profile/index_creation.php?owner=Kevin0256" target="_blank">巴哈小屋</a>
+    </div>
+  </nav>
+
   <div class="container py-5" style="max-width: 1100px;">
     <!-- Intro Block -->
     <div class="profile-block text-center">
       <h1 class="h1 mb-3">現地演唱會參戰紀錄</h1>
+    </div>
+    <!-- Timeline Block -->
+    <div class="general-block">
+      <h2 class="h4 fw-bold">參戰時間軸</h2>
+      <div class="tl-scroll">
+        <div class="tl-track" id="tlTrack">
+          <div class="tl-line"></div>
+        </div>
+      </div>
+      <p class="tl-hint">可左右滾動</p>
     </div>
     <!-- Activities Grid -->
     <div class="row g-4 live-grid">
@@ -193,16 +232,75 @@
           </a>
         </div>
       </div>
-      
-    </div><!-- /live-grid -->
-    <!-- Return button -->
-    <div style="width:100%;display:flex;justify-content:center;margin:2.5rem 0 1.5rem 0;">
-      <a href="/index.html" class="btn btn-outline-light btn-card fw-bold" style="padding:0.75rem 2rem;">
-        Return to Home Page
-      </a>
+
     </div>
+    <!-- /live-grid -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      var events = [
+        { date: '2025-02-07', name: '刺5th 鳴動の刻' },
+        { date: '2025-06-15', name: 'Roselia Sei Stark' },
+        { date: '2025-08-10', name: '刺台北 凛音の理' },
+        { date: '2025-09-23', name: '刺武道館 奏檄の叫' },
+        { date: '2025-11-23', name: 'LisAni 台北 2025' },
+        { date: '2025-12-26', name: 'Roselia 亞巡台北' },
+        { date: '2026-01-15', name: 'Ave Mujica 6th 大阪' },
+        { date: '2026-01-16', name: 'Roselia 亞巡大阪追加' },
+        { date: '2026-01-17', name: '虹咲 花場' },
+        { date: '2026-02-28', name: '邦多利十周年' },
+        { date: '2026-03-01', name: '雞狗 moment/memory' }
+      ];
+
+      // Evenly spaced positions
+      var pos = events.map(function (_, i) {
+        if (events.length <= 1) return 50;
+        return (i / (events.length - 1)) * 100;
+      });
+
+      var track = document.getElementById('tlTrack');
+      if (!track) return;
+
+      // Build event elements (first without left, then position after layout)
+      var els = events.map(function (ev, i) {
+        var isAbove = (i % 2 === 0);
+        var el = document.createElement('div');
+        el.className = 'tl-event';
+
+        var dot = document.createElement('div');
+        dot.className = 'tl-dot';
+
+        var label = document.createElement('div');
+        label.className = 'tl-label ' + (isAbove ? 'tl-above' : 'tl-below');
+
+        var dateEl = document.createElement('span');
+        dateEl.className = 'tl-date';
+        dateEl.textContent = ev.date;
+
+        var nameEl = document.createElement('span');
+        nameEl.className = 'tl-name';
+        nameEl.textContent = ev.name;
+
+        label.appendChild(dateEl);
+        label.appendChild(nameEl);
+        el.appendChild(dot);
+        el.appendChild(label);
+        track.appendChild(el);
+        return el;
+      });
+
+      // Position after layout is ready (need real offsetWidth)
+      requestAnimationFrame(function () {
+        var PAD = 80; // matches .tl-line left/right
+        var usable = track.offsetWidth - PAD * 2;
+        els.forEach(function (el, i) {
+          el.style.left = (PAD + pos[i] / 100 * usable) + 'px';
+        });
+      });
+    })();
+  </script>
 </body>
+
 </html>
