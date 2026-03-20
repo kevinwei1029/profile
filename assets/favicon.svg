@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
+  <!-- Generator: Adobe Illustrator 29.5.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 141)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_未命名漸層);
+      }
+
+      .st1 {
+        fill: none;
+        stroke: #f3f7ff;
+        stroke-linecap: round;
+        stroke-width: 5px;
+      }
+
+      .st2 {
+        fill: #f3f7ff;
+      }
+    </style>
+    <linearGradient id="_未命名漸層" data-name="未命名漸層" x1="-260.27" y1="445.94" x2="-259.27" y2="444.94" gradientTransform="translate(14579 24976.84) scale(56 -56)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10243f"/>
+      <stop offset="1" stop-color="#1f5ca8"/>
+    </linearGradient>
+  </defs>
+  <rect class="st0" x="4" y="4" width="56" height="56" rx="14" ry="14"/>
+  <circle class="st2" cx="32" cy="20.46" r="10.63"/>
+  <path class="st1" d="M15.47,50.51c2.36-8.57,9.45-12.85,16.53-12.85s14.17,4.28,16.53,12.85"/>
+</svg>
